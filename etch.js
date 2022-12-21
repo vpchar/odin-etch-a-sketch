@@ -17,3 +17,14 @@ let step2createGrid = () => {
 
 // step1createRepository
 step2createGrid()
+
+//step3 on hover
+const divs = document.querySelectorAll('.col');
+divs.forEach(div =>{
+    //console.log(div.id)
+    div.addEventListener('mouseover',(e)=>{
+        //attach onHover here
+        //console.log(e);
+        div.classList.add( 'black' ); //change to black
+    });
+});
