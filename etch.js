@@ -1,4 +1,5 @@
-let gridSize = 100; //original grid as per assignment
+let gridSize = 16; //original grid as per assignment
+let colorMode = 1;
 
 let step0createBody = () => {
     const body = document.getElementsByTagName('body');
@@ -6,8 +7,10 @@ let step0createBody = () => {
     body[0].innerHTML = 
     '<div class="buttons">'
         +'<button class="gridBtn" id="prompt">grid size</button> '
-        +'<button class="gridBtn">random color</button> '
-        +'<button class="gridBtn">eraser</button> '
+        +'<button class="gridBtn" id="setBlack">black </button> '
+        +'<button class="gridBtn" id="setRandom">random </button> '
+        +'<button class="gridBtn" id="set10">+10% </button> '
+        +'<button class="gridBtn" id="eraser">eraser</button> '
     +'</div>'
     +'<div class="grid"></div>';
 }
@@ -36,7 +39,55 @@ function attachOnHover(){
         div.addEventListener('mouseover',(e)=>{
             //attach onHover here
             //console.log(e);
-            div.classList.add( 'black' ); //change to black
+            if(colorMode==1){//change to black
+                div.style.backgroundColor = 'black'
+            } 
+            else if(colorMode==4){//eraser
+                div.style.backgroundColor = 'transparent';
+            } 
+            else if(colorMode==2){//random color
+                let o = Math.round, r = Math.random, s = 255;
+                div.style.backgroundColor =  'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';            
+            }
+            else if(colorMode==3){ //+10% on each pass
+                let col = div.style.backgroundColor;
+                //console.log(col);
+                switch(col){
+                    case('rgba(0, 0, 0, 0.1)'):
+                        col = 'rgba(0, 0, 0, 0.2)';
+                        break;
+                    case('rgba(0, 0, 0, 0.2)'):
+                        col = 'rgba(0, 0, 0, 0.3)';
+                        break;
+                    case('rgba(0, 0, 0, 0.3)'):
+                        col = 'rgba(0, 0, 0, 0.4)';
+                        break;
+                    case('rgba(0, 0, 0, 0.4)'):
+                        col = 'rgba(0, 0, 0, 0.5)';
+                        break;
+                    case('rgba(0, 0, 0, 0.5)'):
+                        col = 'rgba(0, 0, 0, 0.6)';
+                        break;
+                    case('rgba(0, 0, 0, 0.6)'):
+                        col = 'rgba(0, 0, 0, 0.7)';
+                        break;
+                    case('rgba(0, 0, 0, 0.7)'):
+                        col = 'rgba(0, 0, 0, 0.8)';
+                        break;
+                    case('rgba(0, 0, 0, 0.8)'):
+                        col = 'rgba(0, 0, 0, 0.9)';
+                        break;
+                    case('rgba(0, 0, 0, 0.9)'):
+                        col = 'rgba(0, 0, 0, 0.99)';
+                        break;
+                    case('rgba(0, 0, 0, 0.99)'):
+                        //empty
+                        break;
+                    default:
+                        col = 'rgba(0, 0, 0, 0.1)';
+                }
+                div.style.backgroundColor = col;
+            }
         });
     });
 }
@@ -51,5 +102,27 @@ prompt.addEventListener('click',(e)=>{
         gridSize=result;
         step2createGrid();
         attachOnHover();
+        if(colorMode==4)colorMode=1; //reset for forgotten eraser
     }
-})
+});
+
+//set it black (default)
+const blackBtn = document.getElementById('setBlack');
+blackBtn.addEventListener('click',(e)=>{
+    colorMode = 1;
+});
+//set it random
+const randBtn = document.getElementById('setRandom');
+randBtn.addEventListener('click',(e)=>{
+    colorMode = 2;
+});
+//set it 10%+
+const btn10 = document.getElementById('set10');
+btn10.addEventListener('click',(e)=>{
+    colorMode = 3;
+});
+//set it to eraser
+const eraseBtn = document.getElementById('eraser');
+eraseBtn.addEventListener('click',(e)=>{
+    colorMode = 4;
+});

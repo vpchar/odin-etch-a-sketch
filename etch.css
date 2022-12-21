@@ -23,7 +23,5 @@ html, body {
     padding: 0;
     aspect-ratio: 1;
 }
-.black{
-    background-color: black;
-}
+
 .buttons{padding-bottom: 12px;}
