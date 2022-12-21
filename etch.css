@@ -1,0 +1,25 @@
+html, body {
+    height: 100%;
+  }
+
+.grid{
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    max-width: 950px;
+    max-height: 950px;
+    /* max width per assignment, square divs => max height */
+    margin: 0;
+    padding: 0;
+    background-color: aliceblue;
+    height: 90%;
+    aspect-ratio: 1;
+}
+.col, .row{
+    display: flex;
+    flex-direction: row;
+    justify-content:stretch;
+    margin:0;
+    padding: 0;
+    aspect-ratio: 1;
+}
